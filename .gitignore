@@ -4,10 +4,6 @@ node_modules/
 
 dist/
 build/
-.out/
-.next/
-.nuxt/
-.output/
 
 .env
 .env.local
@@ -20,14 +16,8 @@ yarn-error.log*
 pnpm-debug.log*
 
 .vscode/
-.idea/
-.cursor/
-
-.DS_Store
-Thumbs.db
 
 .cache/
-.parcel-cache/
 .eslintcache
 .stylelintcache
 
