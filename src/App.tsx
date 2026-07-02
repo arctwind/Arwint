@@ -7,11 +7,9 @@ const BUILT_IN_ENGINES = [
   { id: 'baidu', name: 'Baidu', url: 'https://www.baidu.com/s?wd=%s' },
 ]
 
-const DEFAULT_LINKS = [
-  { name: 'GitHub', url: 'https://github.com' },
-  { name: 'YouTube', url: 'https://www.youtube.com' },
-  { name: 'Bilibili', url: 'https://www.bilibili.com' },
-]
+const GITHUB_REPOSITORY_URL = 'https://github.com/arctwind/Arwint'
+
+const PLACEHOLDER_BUTTON_LABEL = '···'
 
 function formatTime(date: Date) {
   const hours = String(date.getHours()).padStart(2, '0')
@@ -184,13 +182,26 @@ function App() {
         </div>
       </form>
 
-      <nav className="quick-links">
-        {DEFAULT_LINKS.map((link) => (
-          <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-            {link.name}
-          </a>
-        ))}
+      <nav className="quick-actions">
+        <button type="button" className="quick-actions__placeholder">
+          {PLACEHOLDER_BUTTON_LABEL}
+        </button>
       </nav>
+
+      <footer className="page-footer">
+        <a
+          className="page-footer__link"
+          href={GITHUB_REPOSITORY_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
+        </a>
+        <span className="page-footer__divider" aria-hidden="true">·</span>
+        <span className="page-footer__copyright">
+          © 2026 Alvinte (Arctwind)
+        </span>
+      </footer>
     </div>
   )
 }
