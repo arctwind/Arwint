@@ -8,6 +8,12 @@ Arwint is a new-tab / start-page replacement for the browser.
 
 Official site: [www.arwint.com](https://www.arwint.com)
 
+## Tech stack
+
+- Vite
+- React
+- TypeScript
+
 > The official site is not accessible yet.
 
 ## License

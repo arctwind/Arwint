@@ -8,6 +8,12 @@ Arwint 是一个浏览器新标签页 / 起始页替代方案。
 
 官方网站：[www.arwint.com](https://www.arwint.com)
 
+## 技术栈
+
+- Vite
+- React
+- TypeScript
+
 > 官方网站暂无法访问。
 
 ## 许可协议
