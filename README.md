@@ -14,8 +14,6 @@ Official site: [www.arwint.com](https://www.arwint.com)
 - React
 - TypeScript
 
-> The official site is not accessible yet.
-
 ## License
 
 Licensed under the Apache License 2.0. See LICENSE and NOTICE for details.
