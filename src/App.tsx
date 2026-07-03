@@ -7,7 +7,7 @@ import { version } from '../package.json'
 const BUILT_IN_ENGINES = [
   { id: 'google', name: 'Google', url: 'https://www.google.com/search?q=%s' },
   { id: 'bing', name: 'Bing', url: 'https://www.bing.com/search?q=%s' },
-  { id: 'baidu', name: 'Baidu', url: 'https://www.baidu.com/s?wd=%s' },
+  { id: 'baidu', name: '百度', url: 'https://www.baidu.com/s?wd=%s' },
 ]
 
 const GITHUB_REPOSITORY_URL = 'https://github.com/arctwind/Arwint'

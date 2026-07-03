@@ -116,15 +116,17 @@ html.no-color-scheme-transition *::after {
   position: relative;
   display: flex;
   align-items: center;
+  width: 420px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 6px 8px 6px 14px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-form:focus-within {
+  width: 580px;
   border-color: var(--accent);
   box-shadow: 0 2px 18px rgba(74, 144, 164, 0.12);
 }
@@ -153,6 +155,7 @@ html.no-color-scheme-transition *::after {
 
 .engine-select {
   position: relative;
+  flex-shrink: 0;
 }
 
 .engine-button {
@@ -175,7 +178,7 @@ html.no-color-scheme-transition *::after {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 160px;
+  min-width: 100px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -185,7 +188,7 @@ html.no-color-scheme-transition *::after {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
   z-index: 10;
 }
 
@@ -201,7 +204,7 @@ html.no-color-scheme-transition *::after {
   cursor: pointer;
   font-size: 0.9rem;
   color: var(--text);
-  transition: background 0.12s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .engine-menu li:hover {
@@ -210,6 +213,7 @@ html.no-color-scheme-transition *::after {
 
 .engine-menu li.active {
   color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .quick-actions {
@@ -407,7 +411,12 @@ html.no-color-scheme-transition *::after {
   }
 
   .search-form {
+    width: 100%;
     padding-left: 12px;
+  }
+
+  .search-form:focus-within {
+    width: 100%;
   }
 
   .settings-button {
