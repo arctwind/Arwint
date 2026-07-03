@@ -356,6 +356,8 @@ html.no-color-scheme-transition *::after {
 
 .settings-panel {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 75vw;
   height: 75vh;
   max-width: 900px;
@@ -363,9 +365,8 @@ html.no-color-scheme-transition *::after {
   background: var(--bg-soft);
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-  padding: 32px;
   animation: panel-scale-in 0.25s ease;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 @keyframes panel-scale-in {
@@ -380,9 +381,6 @@ html.no-color-scheme-transition *::after {
 }
 
 .settings-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   border: none;
   background: transparent;
   color: var(--text-muted);
@@ -393,6 +391,7 @@ html.no-color-scheme-transition *::after {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   transition: color 0.15s ease, background 0.15s ease;
 }
 
@@ -409,8 +408,65 @@ html.no-color-scheme-transition *::after {
 .settings-title {
   font-size: 1.4rem;
   font-weight: 600;
-  margin: 0 0 12px;
+  margin: 0;
   color: var(--text);
+}
+
+.settings-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px 0;
+  flex-shrink: 0;
+}
+
+.settings-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 160px;
+  padding: 20px 12px;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.settings-nav-item {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.settings-nav-item:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.settings-nav-item.active {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+}
+
+.settings-content {
+  flex: 1;
+  padding: 20px 32px;
+  overflow-y: auto;
+}
+
+.settings-placeholder {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 @media (max-width: 520px) {
@@ -444,7 +500,24 @@ html.no-color-scheme-transition *::after {
   .settings-panel {
     width: 92vw;
     height: 85vh;
-    padding: 24px;
     border-radius: 12px;
+  }
+
+  .settings-topbar {
+    padding: 20px 24px 0;
+  }
+
+  .settings-nav {
+    width: 100px;
+    padding: 16px 8px;
+  }
+
+  .settings-nav-item {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .settings-content {
+    padding: 16px 20px;
   }
 }
