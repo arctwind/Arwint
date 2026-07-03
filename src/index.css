@@ -166,7 +166,14 @@ html.no-color-scheme-transition *::after {
   padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.15s ease, color 0.15s ease;
+  pointer-events: none;
+}
+
+.search-form:focus-within .engine-button {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .engine-button:hover {
