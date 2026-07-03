@@ -7,4 +7,5 @@ export const DEFAULT_THEME_ID = 'default'
 
 export const THEMES: ThemeMeta[] = [
   { id: 'default', name: '默认' },
+  { id: 'geometric', name: '几何' },
 ]
