@@ -148,6 +148,13 @@ html.no-color-scheme-transition *::after {
 .engine-select {
   position: relative;
   flex-shrink: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.search-form.focused .engine-select {
+  width: auto;
+  overflow: visible;
 }
 
 .engine-button {
