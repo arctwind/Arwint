@@ -264,6 +264,10 @@ html.no-color-scheme-transition *::after {
   user-select: none;
 }
 
+.page-footer__version {
+  user-select: none;
+}
+
 .color-scheme-toggle {
   position: fixed;
   top: 24px;

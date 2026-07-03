@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
 import { ColorSchemeToggle } from './components/ColorSchemeToggle'
 import { SettingsModal } from './components/SettingsModal'
+import { version } from '../package.json'
 
 const BUILT_IN_ENGINES = [
   { id: 'google', name: 'Google', url: 'https://www.google.com/search?q=%s' },
@@ -151,6 +152,8 @@ function App() {
         <span className="page-footer__copyright">
           © 2026 Alvinte (Arctwind)
         </span>
+        <span className="page-footer__divider" aria-hidden="true">·</span>
+        <span className="page-footer__version">{version}</span>
       </footer>
       <SettingsModal isOpen={settingsOpen} onClose={closeSettings} />
     </div>
