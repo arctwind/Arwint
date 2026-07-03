@@ -93,7 +93,16 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
           </nav>
           <div className="settings-content">
             {activeTab === 'general' && <p className="settings-placeholder">常规设置</p>}
-            {activeTab === 'shortcuts' && <p className="settings-placeholder">快捷键设置</p>}
+            {activeTab === 'shortcuts' && (
+              <div className="settings-shortcuts">
+                <div className="settings-shortcut-item">
+                  <span className="settings-shortcut-label">切换搜索引擎</span>
+                  <span className="settings-shortcut-keys">
+                    <kbd>Ctrl</kbd> + <kbd>↑</kbd> / <kbd>↓</kbd>
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

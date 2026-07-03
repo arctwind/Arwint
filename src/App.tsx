@@ -14,6 +14,8 @@ const GITHUB_REPOSITORY_URL = 'https://github.com/arctwind/Arwint'
 
 const PLACEHOLDER_BUTTON_LABEL = '···'
 
+const CROSSFADE_DURATION_MS = 600
+
 function formatTime(date: Date) {
   const hours = String(date.getHours()).padStart(2, '0')
   const minutes = String(date.getMinutes()).padStart(2, '0')
@@ -33,14 +35,20 @@ function App() {
   const [time, setTime] = useState(new Date())
   const [query, setQuery] = useState('')
   const [engineId, setEngineId] = useState('google')
+  const [prevEngineId, setPrevEngineId] = useState<string | null>(null)
+  const [isCrossfading, setIsCrossfading] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
+  const isFocusedRef = useRef(false)
+  const engineIdRef = useRef(engineId)
+  engineIdRef.current = engineId
 
   const engine = BUILT_IN_ENGINES.find((e) => e.id === engineId) ?? BUILT_IN_ENGINES[0]
+  const prevEngine = BUILT_IN_ENGINES.find((e) => e.id === prevEngineId)
   const { hours, minutes } = formatTime(time)
 
   useEffect(() => {
@@ -62,6 +70,36 @@ function App() {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
+  useEffect(() => {
+    const ENGINE_COUNT = BUILT_IN_ENGINES.length
+    const handleShortcut = (event: KeyboardEvent) => {
+      if (!isFocusedRef.current) return
+      if (!(event.ctrlKey || event.metaKey)) return
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return
+      event.preventDefault()
+      const currentId = engineIdRef.current
+      const currentIndex = BUILT_IN_ENGINES.findIndex((e) => e.id === currentId)
+      const delta = event.key === 'ArrowUp' ? -1 : 1
+      const nextIndex = (currentIndex + delta + ENGINE_COUNT) % ENGINE_COUNT
+      const nextId = BUILT_IN_ENGINES[nextIndex].id
+      if (nextId === currentId) return
+      setPrevEngineId(currentId)
+      setEngineId(nextId)
+      setIsCrossfading(true)
+    }
+    document.addEventListener('keydown', handleShortcut)
+    return () => document.removeEventListener('keydown', handleShortcut)
+  }, [])
+
+  useEffect(() => {
+    if (!isCrossfading) return
+    const timer = setTimeout(() => {
+      setIsCrossfading(false)
+      setPrevEngineId(null)
+    }, CROSSFADE_DURATION_MS)
+    return () => clearTimeout(timer)
+  }, [isCrossfading, prevEngineId])
+
   const handleSearch = (event: React.FormEvent) => {
     event.preventDefault()
     const trimmed = query.trim()
@@ -71,15 +109,26 @@ function App() {
 
   const closeSettings = useCallback(() => setSettingsOpen(false), [])
 
-  const handleFocus = useCallback(() => setIsFocused(true), [])
+  const handleFocus = useCallback(() => {
+    setIsFocused(true)
+    isFocusedRef.current = true
+  }, [])
 
   const handleBlur = useCallback(() => {
     requestAnimationFrame(() => {
       if (formRef.current && !formRef.current.contains(document.activeElement)) {
         setIsFocused(false)
+        isFocusedRef.current = false
       }
     })
   }, [])
+
+  const switchEngine = useCallback((id: string) => {
+    if (id === engineId) return
+    setPrevEngineId(engineId)
+    setEngineId(id)
+    setIsCrossfading(true)
+  }, [engineId])
 
   return (
     <div className="start-page">
@@ -104,7 +153,7 @@ function App() {
       <form ref={formRef} className={`search-form${isFocused ? ' focused' : ''}`} onSubmit={handleSearch}>
         <input
           ref={inputRef}
-          className="search-input"
+          className={`search-input${isCrossfading ? ' engine-fade' : ''}`}
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -118,7 +167,14 @@ function App() {
             className="engine-button"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            {engine.name}
+            <span className="engine-name-stack">
+              {isCrossfading && prevEngine && (
+                <span className="engine-name engine-fade-out">{prevEngine.name}</span>
+              )}
+              <span className={`engine-name${isCrossfading ? ' engine-fade-in' : ''}`}>
+                {engine.name}
+              </span>
+            </span>
           </button>
           <ul className={`engine-menu ${menuOpen ? 'open' : ''}`}>
             {BUILT_IN_ENGINES.map((e) => (
@@ -126,7 +182,7 @@ function App() {
                 key={e.id}
                 className={e.id === engineId ? 'active' : ''}
                 onClick={() => {
-                  setEngineId(e.id)
+                  switchEngine(e.id)
                   setMenuOpen(false)
                   inputRef.current?.focus()
                 }}

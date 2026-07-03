@@ -147,6 +147,15 @@ html.no-color-scheme-transition *::after {
   color: var(--text-muted);
 }
 
+.search-input.engine-fade::placeholder {
+  animation: placeholder-fade 0.6s ease;
+}
+
+@keyframes placeholder-fade {
+  0% { color: transparent; }
+  100% { color: var(--text-muted); }
+}
+
 .search-form:not(.focused) .search-input:placeholder-shown {
   text-indent: calc(50% - 75px);
 }
@@ -179,6 +188,34 @@ html.no-color-scheme-transition *::after {
 .search-form.focused .engine-button {
   opacity: 1;
   pointer-events: auto;
+}
+
+.engine-name-stack {
+  display: inline-grid;
+  vertical-align: middle;
+}
+
+.engine-name-stack > .engine-name {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.engine-fade-out {
+  animation: engine-fade-out 0.6s ease forwards;
+}
+
+.engine-fade-in {
+  animation: engine-fade-in 0.6s ease forwards;
+}
+
+@keyframes engine-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes engine-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .engine-button:hover {
@@ -467,6 +504,50 @@ html.no-color-scheme-transition *::after {
 .settings-placeholder {
   color: var(--text-muted);
   font-size: 0.95rem;
+}
+
+.settings-shortcuts {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-shortcut-item:last-child {
+  border-bottom: none;
+}
+
+.settings-shortcut-label {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.settings-shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 var(--border);
+  line-height: 1.4;
 }
 
 @media (max-width: 520px) {
