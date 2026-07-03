@@ -1,14 +1,4 @@
-import { useEffect, useState } from 'react'
-
-type ColorScheme = 'light' | 'dark'
-
-const LOCAL_STORAGE_KEY = 'colorScheme'
-
-function getInitialColorScheme(): ColorScheme {
-  const saved = localStorage.getItem(LOCAL_STORAGE_KEY)
-  if (saved === 'light' || saved === 'dark') return saved
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
+import { useTheme } from './ThemeProvider'
 
 function SunIcon() {
   return (
@@ -28,19 +18,13 @@ function MoonIcon() {
 }
 
 export function ColorSchemeToggle() {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(getInitialColorScheme)
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-color-scheme', colorScheme)
-    // colorScheme is the initial value set by getInitialColorScheme during first render.
-    // Subsequent changes are applied synchronously in the toggle handler to support View Transition API.
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const { colorScheme, toggleColorScheme } = useTheme()
 
   const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
     const x = rect.left + rect.width / 2
     const y = rect.top + rect.height / 2
-    const next: ColorScheme = colorScheme === 'light' ? 'dark' : 'light'
+    const next = colorScheme === 'light' ? 'dark' : 'light'
 
     const root = document.documentElement
     root.style.setProperty('--color-scheme-origin-x', `${x}px`)
@@ -54,17 +38,14 @@ export function ColorSchemeToggle() {
     }
 
     if (!doc.startViewTransition) {
-      root.setAttribute('data-color-scheme', next)
-      localStorage.setItem(LOCAL_STORAGE_KEY, next)
-      setColorScheme(next)
+      toggleColorScheme()
       return
     }
 
     root.classList.add('no-color-scheme-transition')
     const transition = doc.startViewTransition(() => {
       root.setAttribute('data-color-scheme', next)
-      localStorage.setItem(LOCAL_STORAGE_KEY, next)
-      setColorScheme(next)
+      toggleColorScheme()
     })
 
     transition.ready

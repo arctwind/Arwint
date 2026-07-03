@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
 import { ColorSchemeToggle } from './components/ColorSchemeToggle'
 import { SettingsModal } from './components/SettingsModal'
+import { ThemeProvider } from './components/ThemeProvider'
 import { version } from '../package.json'
 
 const BUILT_IN_ENGINES = [
@@ -138,93 +139,95 @@ function App() {
   }, [engineId])
 
   return (
-    <div className="start-page">
-      <button
-        type="button"
-        className="settings-button"
-        onClick={() => setSettingsOpen(true)}
-        aria-label="Open settings"
-      >
-        <GearIcon />
-      </button>
-      <ColorSchemeToggle />
-
-      <section className="clock-section">
-        <div className="time">
-          {hours}
-          <span className="colon">:</span>
-          {minutes}
-        </div>
-      </section>
-
-      <form ref={formRef} className={`search-form${isFocused ? ' focused' : ''}`} onSubmit={handleSearch}>
-        <input
-          ref={inputRef}
-          className={`search-input${isCrossfading ? ' engine-fade' : ''}`}
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholder={`Search with ${engine.name}`}
-        />
-        <div className="engine-select" ref={menuRef}>
-          <button
-            type="button"
-            className="engine-button"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span className="engine-name-stack">
-              {isCrossfading && prevEngine && (
-                <span className="engine-name engine-fade-out">{prevEngine.name}</span>
-              )}
-              <span className={`engine-name${isCrossfading ? ' engine-fade-in' : ''}`}>
-                {engine.name}
-              </span>
-            </span>
-          </button>
-          <ul className={`engine-menu ${menuOpen ? 'open' : ''}`}>
-            {BUILT_IN_ENGINES.map((e) => (
-              <li
-                key={e.id}
-                className={e.id === engineId ? 'active' : ''}
-                onClick={() => {
-                  switchEngine(e.id)
-                  setMenuOpen(false)
-                  inputRef.current?.focus()
-                }}
-              >
-                {e.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </form>
-
-      <nav className="quick-actions">
-        <button type="button" className="quick-actions__placeholder">
-          {PLACEHOLDER_BUTTON_LABEL}
-        </button>
-      </nav>
-
-      <footer className="page-footer">
-        <a
-          className="page-footer__link"
-          href={GITHUB_REPOSITORY_URL}
-          target="_blank"
-          rel="noreferrer"
+    <ThemeProvider>
+      <div className="start-page">
+        <button
+          type="button"
+          className="settings-button"
+          onClick={() => setSettingsOpen(true)}
+          aria-label="Open settings"
         >
-          GitHub
-        </a>
-        <span className="page-footer__divider" aria-hidden="true">·</span>
-        <span className="page-footer__copyright">
-          © 2026 Alvinte (Arctwind)
-        </span>
-        <span className="page-footer__divider" aria-hidden="true">·</span>
-        <span className="page-footer__version">{version}</span>
-      </footer>
-      <SettingsModal isOpen={settingsOpen} onClose={closeSettings} />
-    </div>
+          <GearIcon />
+        </button>
+        <ColorSchemeToggle />
+
+        <section className="clock-section">
+          <div className="time">
+            {hours}
+            <span className="colon">:</span>
+            {minutes}
+          </div>
+        </section>
+
+        <form ref={formRef} className={`search-form${isFocused ? ' focused' : ''}`} onSubmit={handleSearch}>
+          <input
+            ref={inputRef}
+            className={`search-input${isCrossfading ? ' engine-fade' : ''}`}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            placeholder={`Search with ${engine.name}`}
+          />
+          <div className="engine-select" ref={menuRef}>
+            <button
+              type="button"
+              className="engine-button"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span className="engine-name-stack">
+                {isCrossfading && prevEngine && (
+                  <span className="engine-name engine-fade-out">{prevEngine.name}</span>
+                )}
+                <span className={`engine-name${isCrossfading ? ' engine-fade-in' : ''}`}>
+                  {engine.name}
+                </span>
+              </span>
+            </button>
+            <ul className={`engine-menu ${menuOpen ? 'open' : ''}`}>
+              {BUILT_IN_ENGINES.map((e) => (
+                <li
+                  key={e.id}
+                  className={e.id === engineId ? 'active' : ''}
+                  onClick={() => {
+                    switchEngine(e.id)
+                    setMenuOpen(false)
+                    inputRef.current?.focus()
+                  }}
+                >
+                  {e.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </form>
+
+        <nav className="quick-actions">
+          <button type="button" className="quick-actions__placeholder">
+            {PLACEHOLDER_BUTTON_LABEL}
+          </button>
+        </nav>
+
+        <footer className="page-footer">
+          <a
+            className="page-footer__link"
+            href={GITHUB_REPOSITORY_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+          <span className="page-footer__divider" aria-hidden="true">·</span>
+          <span className="page-footer__copyright">
+            © 2026 Alvinte (Arctwind)
+          </span>
+          <span className="page-footer__divider" aria-hidden="true">·</span>
+          <span className="page-footer__version">{version}</span>
+        </footer>
+        <SettingsModal isOpen={settingsOpen} onClose={closeSettings} />
+      </div>
+    </ThemeProvider>
   )
 }
 

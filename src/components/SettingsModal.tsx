@@ -1,4 +1,6 @@
 import { useEffect, useCallback, useRef, useState } from 'react'
+import { useTheme } from './ThemeProvider'
+import { THEMES } from '../themes'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -7,6 +9,7 @@ interface SettingsModalProps {
 
 const TAB_ITEMS = [
   { id: 'general', label: '常规' },
+  { id: 'appearance', label: '外观' },
   { id: 'shortcuts', label: '快捷键' },
 ]
 
@@ -45,6 +48,7 @@ function CloseIcon() {
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [activeTab, setActiveTab] = useState(getInitialTab)
   const [openInNewTab, setOpenInNewTab] = useState(getOpenInNewTab)
+  const { themeId, setThemeId } = useTheme()
   const closeRef = useRef<HTMLButtonElement>(null)
 
   const switchTab = useCallback((id: string) => {
@@ -119,6 +123,26 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 >
                   <span className="settings-toggle-thumb" />
                 </button>
+              </div>
+            )}
+            {activeTab === 'appearance' && (
+              <div className="settings-themes">
+                {THEMES.map((theme) => (
+                  <label
+                    key={theme.id}
+                    className={`settings-theme-option${themeId === theme.id ? ' active' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="theme"
+                      value={theme.id}
+                      checked={themeId === theme.id}
+                      onChange={() => setThemeId(theme.id)}
+                      className="settings-theme-radio"
+                    />
+                    {theme.name}
+                  </label>
+                ))}
               </div>
             )}
             {activeTab === 'shortcuts' && (

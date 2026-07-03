@@ -1,4 +1,10 @@
 :root {
+  --radius: 14px;
+}
+
+/* default theme — light */
+:root,
+[data-theme="default"] {
   --bg: #f7f7f5;
   --bg-soft: #ffffff;
   --text: #2a2a2a;
@@ -7,12 +13,12 @@
   --accent-hover: #3a7a8c;
   --border: #e0e0de;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  --radius: 14px;
 
   color-scheme: light;
 }
 
-[data-color-scheme="dark"] {
+/* default theme — dark */
+[data-theme="default"][data-color-scheme="dark"] {
   --bg: #141416;
   --bg-soft: #1c1c1e;
   --text: #e8e8e8;
@@ -547,6 +553,36 @@ html.no-color-scheme-transition *::after {
 
 .settings-toggle.active .settings-toggle-thumb {
   transform: translateX(20px);
+}
+
+.settings-themes {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: background 0.15s ease;
+}
+
+.settings-theme-option:hover {
+  background: var(--bg);
+}
+
+.settings-theme-option.active {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+}
+
+.settings-theme-radio {
+  accent-color: var(--accent);
 }
 
 .settings-shortcuts {
