@@ -10,6 +10,24 @@ const TAB_ITEMS = [
   { id: 'shortcuts', label: '快捷键' },
 ]
 
+const ACTIVE_TAB_COOKIE = 'active_tab'
+const COOKIE_MAX_AGE = '31536000'
+
+function getCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))
+  return match ? decodeURIComponent(match[1]) : null
+}
+
+function setCookie(name: string, value: string) {
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${COOKIE_MAX_AGE}`
+}
+
+function getInitialTab(): string {
+  const saved = getCookie(ACTIVE_TAB_COOKIE)
+  if (saved && TAB_ITEMS.some((t) => t.id === saved)) return saved
+  return 'general'
+}
+
 function CloseIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -20,8 +38,13 @@ function CloseIcon() {
 }
 
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
-  const [activeTab, setActiveTab] = useState('general')
+  const [activeTab, setActiveTab] = useState(getInitialTab)
   const closeRef = useRef<HTMLButtonElement>(null)
+
+  const switchTab = useCallback((id: string) => {
+    setActiveTab(id)
+    setCookie(ACTIVE_TAB_COOKIE, id)
+  }, [])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -34,7 +57,6 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown)
       closeRef.current?.focus()
-      setActiveTab('general')
       return () => document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, handleKeyDown])
@@ -63,7 +85,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 key={item.id}
                 type="button"
                 className={`settings-nav-item${activeTab === item.id ? ' active' : ''}`}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => switchTab(item.id)}
               >
                 {item.label}
               </button>
