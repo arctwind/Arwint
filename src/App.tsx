@@ -20,15 +20,6 @@ function formatTime(date: Date) {
   return { hours, minutes }
 }
 
-function SearchIcon() {
-  return (
-    <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
-  )
-}
-
 function GearIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -44,8 +35,10 @@ function App() {
   const [engineId, setEngineId] = useState('google')
   const [menuOpen, setMenuOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const engine = BUILT_IN_ENGINES.find((e) => e.id === engineId) ?? BUILT_IN_ENGINES[0]
   const { hours, minutes } = formatTime(time)
@@ -78,6 +71,16 @@ function App() {
 
   const closeSettings = useCallback(() => setSettingsOpen(false), [])
 
+  const handleFocus = useCallback(() => setIsFocused(true), [])
+
+  const handleBlur = useCallback(() => {
+    requestAnimationFrame(() => {
+      if (formRef.current && !formRef.current.contains(document.activeElement)) {
+        setIsFocused(false)
+      }
+    })
+  }, [])
+
   return (
     <div className="start-page">
       <button
@@ -98,14 +101,15 @@ function App() {
         </div>
       </section>
 
-      <form className="search-form" onSubmit={handleSearch}>
-        <SearchIcon />
+      <form ref={formRef} className={`search-form${isFocused ? ' focused' : ''}`} onSubmit={handleSearch}>
         <input
           ref={inputRef}
           className="search-input"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           placeholder={`Search with ${engine.name}`}
         />
         <div className="engine-select" ref={menuRef}>
@@ -124,6 +128,7 @@ function App() {
                 onClick={() => {
                   setEngineId(e.id)
                   setMenuOpen(false)
+                  inputRef.current?.focus()
                 }}
               >
                 {e.name}

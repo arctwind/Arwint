@@ -125,18 +125,10 @@ html.no-color-scheme-transition *::after {
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.search-form:focus-within {
+.search-form.focused {
   width: 580px;
   border-color: var(--accent);
   box-shadow: 0 2px 18px rgba(74, 144, 164, 0.12);
-}
-
-.search-icon {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  color: var(--text-muted);
-  margin-right: 10px;
 }
 
 .search-input {
@@ -171,7 +163,7 @@ html.no-color-scheme-transition *::after {
   pointer-events: none;
 }
 
-.search-form:focus-within .engine-button {
+.search-form.focused .engine-button {
   opacity: 1;
   pointer-events: auto;
 }
@@ -422,7 +414,7 @@ html.no-color-scheme-transition *::after {
     padding-left: 12px;
   }
 
-  .search-form:focus-within {
+  .search-form.focused {
     width: 100%;
   }
 
