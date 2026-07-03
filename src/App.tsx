@@ -16,6 +16,8 @@ const PLACEHOLDER_BUTTON_LABEL = '···'
 
 const CROSSFADE_DURATION_MS = 600
 
+const OPEN_IN_NEW_TAB_KEY = 'openInNewTab'
+
 function formatTime(date: Date) {
   const hours = String(date.getHours()).padStart(2, '0')
   const minutes = String(date.getMinutes()).padStart(2, '0')
@@ -104,7 +106,12 @@ function App() {
     event.preventDefault()
     const trimmed = query.trim()
     if (!trimmed) return
-    window.location.href = engine.url.replace('%s', encodeURIComponent(trimmed))
+    const url = engine.url.replace('%s', encodeURIComponent(trimmed))
+    if (localStorage.getItem(OPEN_IN_NEW_TAB_KEY) === 'true') {
+      window.open(url, '_blank')
+    } else {
+      window.location.href = url
+    }
   }
 
   const closeSettings = useCallback(() => setSettingsOpen(false), [])

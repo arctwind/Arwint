@@ -12,6 +12,11 @@ const TAB_ITEMS = [
 
 const ACTIVE_TAB_COOKIE = 'active_tab'
 const COOKIE_MAX_AGE = '31536000'
+const OPEN_IN_NEW_TAB_KEY = 'openInNewTab'
+
+function getOpenInNewTab(): boolean {
+  return localStorage.getItem(OPEN_IN_NEW_TAB_KEY) === 'true'
+}
 
 function getCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))
@@ -39,11 +44,20 @@ function CloseIcon() {
 
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [activeTab, setActiveTab] = useState(getInitialTab)
+  const [openInNewTab, setOpenInNewTab] = useState(getOpenInNewTab)
   const closeRef = useRef<HTMLButtonElement>(null)
 
   const switchTab = useCallback((id: string) => {
     setActiveTab(id)
     setCookie(ACTIVE_TAB_COOKIE, id)
+  }, [])
+
+  const toggleOpenInNewTab = useCallback(() => {
+    setOpenInNewTab((prev) => {
+      const next = !prev
+      localStorage.setItem(OPEN_IN_NEW_TAB_KEY, String(next))
+      return next
+    })
   }, [])
 
   const handleKeyDown = useCallback(
@@ -92,7 +106,21 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             ))}
           </nav>
           <div className="settings-content">
-            {activeTab === 'general' && <p className="settings-placeholder">常规设置</p>}
+            {activeTab === 'general' && (
+              <div className="settings-toggle-item">
+                <span className="settings-toggle-label">新标签页打开搜索结果</span>
+                <button
+                  type="button"
+                  className={`settings-toggle${openInNewTab ? ' active' : ''}`}
+                  onClick={toggleOpenInNewTab}
+                  role="switch"
+                  aria-checked={openInNewTab}
+                  aria-label="新标签页打开搜索结果"
+                >
+                  <span className="settings-toggle-thumb" />
+                </button>
+              </div>
+            )}
             {activeTab === 'shortcuts' && (
               <div className="settings-shortcuts">
                 <div className="settings-shortcut-item">
