@@ -16,4 +16,4 @@ Arwint 是一个浏览器新标签页 / 起始页替代方案。
 
 ## 许可协议
 
-采用 Apache License 2.0。详情请参见 LICENSE 与 NOTICE 文件。
+采用 GNU Affero General Public License v3.0（AGPL-3.0-only）。详情请参见 LICENSE 文件。

@@ -16,4 +16,4 @@ Official site: [www.arwint.com](https://www.arwint.com)
 
 ## License
 
-Licensed under the Apache License 2.0. See LICENSE and NOTICE for details.
+Licensed under the GNU Affero General Public License v3.0 (AGPL-3.0-only). See LICENSE for details.
