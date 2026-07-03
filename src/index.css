@@ -139,10 +139,16 @@ html.no-color-scheme-transition *::after {
   color: var(--text);
   font-size: 1rem;
   padding: 12px 0;
+  text-indent: 0;
+  transition: text-indent 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .search-input::placeholder {
   color: var(--text-muted);
+}
+
+.search-form:not(.focused) .search-input:placeholder-shown {
+  text-indent: calc(50% - 75px);
 }
 
 .engine-select {
