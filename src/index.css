@@ -12,7 +12,7 @@
   color-scheme: light;
 }
 
-[data-theme="dark"] {
+[data-color-scheme="dark"] {
   --bg: #141416;
   --bg-soft: #1c1c1e;
   --text: #e8e8e8;
@@ -46,10 +46,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-html.no-theme-transition,
-html.no-theme-transition *,
-html.no-theme-transition *::before,
-html.no-theme-transition *::after {
+html.no-color-scheme-transition,
+html.no-color-scheme-transition *,
+html.no-color-scheme-transition *::before,
+html.no-color-scheme-transition *::after {
   transition: none !important;
 }
 
@@ -65,16 +65,16 @@ html.no-theme-transition *::after {
 
 ::view-transition-new(root) {
   z-index: 2;
-  clip-path: circle(0% at var(--theme-origin-x) var(--theme-origin-y));
-  animation: theme-reveal 0.55s ease-out forwards;
+  clip-path: circle(0% at var(--color-scheme-origin-x) var(--color-scheme-origin-y));
+  animation: color-scheme-reveal 0.55s ease-out forwards;
 }
 
-@keyframes theme-reveal {
+@keyframes color-scheme-reveal {
   from {
-    clip-path: circle(0% at var(--theme-origin-x) var(--theme-origin-y));
+    clip-path: circle(0% at var(--color-scheme-origin-x) var(--color-scheme-origin-y));
   }
   to {
-    clip-path: circle(150% at var(--theme-origin-x) var(--theme-origin-y));
+    clip-path: circle(150% at var(--color-scheme-origin-x) var(--color-scheme-origin-y));
   }
 }
 
@@ -264,7 +264,7 @@ html.no-theme-transition *::after {
   user-select: none;
 }
 
-.theme-toggle {
+.color-scheme-toggle {
   position: fixed;
   top: 24px;
   right: 24px;
@@ -282,11 +282,11 @@ html.no-theme-transition *::after {
   transition: color 0.15s ease, background 0.15s ease;
 }
 
-.theme-toggle:hover {
+.color-scheme-toggle:hover {
   color: var(--text);
 }
 
-.theme-toggle svg {
+.color-scheme-toggle svg {
   width: 20px;
   height: 20px;
 }
