@@ -267,7 +267,7 @@ html.no-color-scheme-transition *::after {
 .color-scheme-toggle {
   position: fixed;
   top: 24px;
-  right: 24px;
+  right: 76px;
   border: none;
   background: var(--bg-soft);
   color: var(--text-muted);
@@ -291,6 +291,108 @@ html.no-color-scheme-transition *::after {
   height: 20px;
 }
 
+.settings-button {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  border: none;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.settings-button:hover {
+  color: var(--text);
+}
+
+.settings-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: overlay-fade-in 0.2s ease;
+}
+
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.settings-panel {
+  position: relative;
+  width: 75vw;
+  height: 75vh;
+  max-width: 900px;
+  max-height: 800px;
+  background: var(--bg-soft);
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  animation: panel-scale-in 0.25s ease;
+  overflow-y: auto;
+}
+
+@keyframes panel-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.settings-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.settings-close:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.settings-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.settings-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
 @media (max-width: 520px) {
   .start-page {
     padding-top: 10vh;
@@ -302,5 +404,22 @@ html.no-color-scheme-transition *::after {
 
   .search-form {
     padding-left: 12px;
+  }
+
+  .settings-button {
+    top: 20px;
+    right: 20px;
+  }
+
+  .color-scheme-toggle {
+    top: 20px;
+    right: 68px;
+  }
+
+  .settings-panel {
+    width: 92vw;
+    height: 85vh;
+    padding: 24px;
+    border-radius: 12px;
   }
 }
