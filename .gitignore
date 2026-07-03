@@ -21,6 +21,8 @@ pnpm-debug.log*
 .eslintcache
 .stylelintcache
 
+*.code-workspace
+
 *.tmp
 *.swp
 *.swo
