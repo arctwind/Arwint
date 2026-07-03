@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
 import { ColorSchemeToggle } from './components/ColorSchemeToggle'
 import { SettingsModal } from './components/SettingsModal'
@@ -75,6 +75,8 @@ function App() {
     window.location.href = engine.url.replace('%s', encodeURIComponent(trimmed))
   }
 
+  const closeSettings = useCallback(() => setSettingsOpen(false), [])
+
   return (
     <div className="start-page">
       <button
@@ -150,7 +152,7 @@ function App() {
           © 2026 Alvinte (Arctwind)
         </span>
       </footer>
-      <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsModal isOpen={settingsOpen} onClose={closeSettings} />
     </div>
   )
 }
