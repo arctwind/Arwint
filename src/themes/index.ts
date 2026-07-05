@@ -1,11 +1,14 @@
+import { defaultTheme, DEFAULT_THEME_ID } from './default'
+import { geometricTheme } from './geometric'
+
+export { DEFAULT_THEME_ID }
+
 export interface ThemeMeta {
   id: string
   name: string
 }
 
-export const DEFAULT_THEME_ID = 'default'
-
 export const THEMES: ThemeMeta[] = [
-  { id: 'default', name: '默认' },
-  { id: 'geometric', name: '几何' },
+  defaultTheme,
+  geometricTheme,
 ]

@@ -1,0 +1,28 @@
+/* default theme — light */
+:root,
+[data-theme="default"] {
+  --bg: #f7f7f5;
+  --bg-soft: #ffffff;
+  --text: #2a2a2a;
+  --text-muted: #8a8a8a;
+  --accent: #4a90a4;
+  --accent-hover: #3a7a8c;
+  --border: #e0e0de;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+  color-scheme: light;
+}
+
+/* default theme — dark */
+[data-theme="default"][data-color-scheme="dark"] {
+  --bg: #141416;
+  --bg-soft: #1c1c1e;
+  --text: #e8e8e8;
+  --text-muted: #6e6e72;
+  --accent: #6ab4c8;
+  --accent-hover: #8ac8d8;
+  --border: #2c2c2e;
+  --shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+
+  color-scheme: dark;
+}
