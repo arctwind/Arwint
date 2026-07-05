@@ -24,8 +24,6 @@ export function CanvasLayer({ effect }: CanvasLayerProps) {
       const h = window.innerHeight
       el!.width = w * dpr
       el!.height = h * dpr
-      el!.style.width = `${w}px`
-      el!.style.height = `${h}px`
       cx!.scale(dpr, dpr)
       effect.resize?.(cx!, w, h)
     }
@@ -57,8 +55,6 @@ export function CanvasLayer({ effect }: CanvasLayerProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        width: '100%',
-        height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
       }}
