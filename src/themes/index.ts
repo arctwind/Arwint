@@ -1,5 +1,6 @@
 import { defaultTheme, DEFAULT_THEME_ID } from './default'
 import { geometricTheme } from './geometric'
+import { pineForestTheme } from './pine-forest'
 
 export { DEFAULT_THEME_ID }
 export { CanvasLayer } from './canvas/CanvasLayer'
@@ -15,4 +16,5 @@ export interface ThemeMeta {
 export const THEMES: ThemeMeta[] = [
   defaultTheme,
   geometricTheme,
+  pineForestTheme,
 ]
