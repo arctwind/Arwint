@@ -81,6 +81,8 @@ html.no-color-scheme-transition *::after {
 }
 
 .clock-section .colon {
+  display: inline-block;
+  transform: translateY(-0.07em);
   animation: blink 1.2s ease-in-out infinite;
 }
 
