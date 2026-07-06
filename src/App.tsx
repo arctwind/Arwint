@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './index.css'
 import { ColorSchemeToggle } from './components/ColorSchemeToggle'
+import { QuickLinks } from './components/QuickLinks'
 import { SettingsModal } from './components/SettingsModal'
 import { ThemeProvider, useTheme } from './components/ThemeProvider'
 import { THEMES, CanvasLayer } from './themes'
@@ -13,8 +14,6 @@ const BUILT_IN_ENGINES = [
 ]
 
 const GITHUB_REPOSITORY_URL = 'https://github.com/arctwind/Arwint'
-
-const PLACEHOLDER_BUTTON_LABEL = '···'
 
 const CROSSFADE_DURATION_MS = 600
 
@@ -212,11 +211,7 @@ function App() {
           </div>
         </form>
 
-        <nav className="quick-actions">
-          <button type="button" className="quick-actions__placeholder">
-            {PLACEHOLDER_BUTTON_LABEL}
-          </button>
-        </nav>
+        <QuickLinks />
 
         <footer className="page-footer">
           <a
