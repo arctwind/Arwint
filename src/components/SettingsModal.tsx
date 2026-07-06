@@ -13,25 +13,15 @@ const TAB_ITEMS = [
   { id: 'shortcuts', label: '快捷键' },
 ]
 
-const ACTIVE_TAB_COOKIE = 'active_tab'
-const COOKIE_MAX_AGE = '31536000'
+const ACTIVE_TAB_KEY = 'activeTab'
 const OPEN_IN_NEW_TAB_KEY = 'openInNewTab'
 
 function getOpenInNewTab(): boolean {
   return localStorage.getItem(OPEN_IN_NEW_TAB_KEY) === 'true'
 }
 
-function getCookie(name: string): string | null {
-  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))
-  return match ? decodeURIComponent(match[1]) : null
-}
-
-function setCookie(name: string, value: string) {
-  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${COOKIE_MAX_AGE}`
-}
-
 function getInitialTab(): string {
-  const saved = getCookie(ACTIVE_TAB_COOKIE)
+  const saved = localStorage.getItem(ACTIVE_TAB_KEY)
   if (saved && TAB_ITEMS.some((t) => t.id === saved)) return saved
   return 'general'
 }
@@ -53,7 +43,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
   const switchTab = useCallback((id: string) => {
     setActiveTab(id)
-    setCookie(ACTIVE_TAB_COOKIE, id)
+    localStorage.setItem(ACTIVE_TAB_KEY, id)
   }, [])
 
   const toggleOpenInNewTab = useCallback(() => {
