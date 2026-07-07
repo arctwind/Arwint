@@ -78,12 +78,14 @@ html.no-color-scheme-transition *::after {
   line-height: 1;
   color: var(--text);
   font-variant-numeric: tabular-nums;
+  user-select: none;
 }
 
 .clock-section .colon {
   display: inline-block;
   transform: translateY(-0.07em);
   animation: blink 1.2s ease-in-out infinite;
+  user-select: none;
 }
 
 @keyframes blink {
@@ -124,6 +126,7 @@ html.no-color-scheme-transition *::after {
 
 .search-input::placeholder {
   color: var(--text-muted);
+  user-select: none;
 }
 
 .search-input.engine-fade::placeholder {
@@ -162,6 +165,7 @@ html.no-color-scheme-transition *::after {
   opacity: 0;
   transition: opacity 0.25s ease, background 0.15s ease, color 0.15s ease;
   pointer-events: none;
+  user-select: none;
 }
 
 .search-form.focused .engine-button {
@@ -233,6 +237,7 @@ html.no-color-scheme-transition *::after {
   font-size: 0.9rem;
   color: var(--text);
   transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
 }
 
 .engine-menu li:hover {
@@ -267,6 +272,7 @@ html.no-color-scheme-transition *::after {
   text-decoration: none;
   color: var(--text-muted);
   transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
 }
 
 .quick-link__target:hover {
@@ -327,6 +333,7 @@ html.no-color-scheme-transition *::after {
   opacity: 0;
   box-shadow: var(--shadow);
   transition: opacity 0.15s ease, color 0.15s ease;
+  user-select: none;
 }
 
 .quick-link:hover .quick-link__edit {
@@ -355,6 +362,7 @@ html.no-color-scheme-transition *::after {
   align-items: center;
   justify-content: center;
   transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  user-select: none;
 }
 
 .quick-add:hover {
@@ -402,6 +410,7 @@ html.no-color-scheme-transition *::after {
 .quick-editor__label {
   font-size: 0.85rem;
   color: var(--text-muted);
+  user-select: none;
 }
 
 .quick-editor__input {
@@ -413,6 +422,10 @@ html.no-color-scheme-transition *::after {
   padding: 10px 12px;
   outline: none;
   transition: border-color 0.15s ease;
+}
+
+.quick-editor__input::placeholder {
+  user-select: none;
 }
 
 .quick-editor__input:focus {
@@ -439,6 +452,7 @@ html.no-color-scheme-transition *::after {
   padding: 8px 16px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
 }
 
 .quick-editor__delete {
@@ -484,6 +498,7 @@ html.no-color-scheme-transition *::after {
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s ease;
+  user-select: none;
 }
 
 .page-footer__link:hover {
@@ -518,6 +533,7 @@ html.no-color-scheme-transition *::after {
   justify-content: center;
   box-shadow: var(--shadow);
   transition: color 0.15s ease, background 0.15s ease;
+  user-select: none;
 }
 
 .color-scheme-toggle:hover {
@@ -545,6 +561,7 @@ html.no-color-scheme-transition *::after {
   justify-content: center;
   box-shadow: var(--shadow);
   transition: color 0.15s ease, background 0.15s ease;
+  user-select: none;
 }
 
 .settings-button:hover {
@@ -611,6 +628,7 @@ html.no-color-scheme-transition *::after {
   justify-content: center;
   flex-shrink: 0;
   transition: color 0.15s ease, background 0.15s ease;
+  user-select: none;
 }
 
 .settings-close:hover {
@@ -628,6 +646,7 @@ html.no-color-scheme-transition *::after {
   font-weight: 600;
   margin: 0;
   color: var(--text);
+  user-select: none;
 }
 
 .settings-topbar {
@@ -664,6 +683,7 @@ html.no-color-scheme-transition *::after {
   cursor: pointer;
   text-align: left;
   transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
 }
 
 .settings-nav-item:hover {
@@ -697,6 +717,7 @@ html.no-color-scheme-transition *::after {
 .settings-toggle-label {
   font-size: 0.95rem;
   color: var(--text);
+  user-select: none;
 }
 
 .settings-toggle {
@@ -709,6 +730,7 @@ html.no-color-scheme-transition *::after {
   cursor: pointer;
   transition: background 0.2s ease;
   flex-shrink: 0;
+  user-select: none;
 }
 
 .settings-toggle.active {
@@ -745,6 +767,7 @@ html.no-color-scheme-transition *::after {
   font-size: 0.95rem;
   color: var(--text);
   transition: background 0.15s ease;
+  user-select: none;
 }
 
 .settings-theme-option:hover {
@@ -780,6 +803,7 @@ html.no-color-scheme-transition *::after {
 .settings-shortcut-label {
   font-size: 0.95rem;
   color: var(--text);
+  user-select: none;
 }
 
 .settings-shortcut-keys {
@@ -789,6 +813,7 @@ html.no-color-scheme-transition *::after {
   font-size: 0.85rem;
   color: var(--text-muted);
   flex-shrink: 0;
+  user-select: none;
 }
 
 kbd {
