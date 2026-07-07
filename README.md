@@ -8,6 +8,12 @@ Arwint is a new-tab / start-page replacement for the browser.
 
 Official site: [www.arwint.com](https://www.arwint.com)
 
+## Preview
+
+|                       Light                       |                      Dark                       |
+| :------------------------------------------------: | :----------------------------------------------: |
+| ![Light theme](screenshots/light.png) | ![Dark theme](screenshots/dark.png) |
+
 ## Tech stack
 
 - Vite
