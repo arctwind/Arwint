@@ -14,6 +14,12 @@ Official site: [www.arwint.com](https://www.arwint.com)
 | :------------------------------------------------: | :----------------------------------------------: |
 | ![Light theme](screenshots/light.png) | ![Dark theme](screenshots/dark.png) |
 
+## Sponsorship
+
+如果你正在寻找云服务器，不妨试试雨云 —— 稳定可靠，性价比出色。注册时填写邀请码 **Alvinte** 可享优惠。
+
+[www.rainyun.com](https://www.rainyun.com/Alvinte_)
+
 ## Tech stack
 
 - Vite
